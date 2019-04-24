@@ -20,7 +20,7 @@ This is my 42 ft\_printf, a recode of the libc printf.
  - Print memory specifier `%m` prints raw memory starting at given address
    - Default output in hexadecimal, alternate form `#` displays ascii, replacing nonprintable with `.`
    - Precision specifies number of bytes; default 4.
-   - Can be used with `hh, `h`, `l`, `ll`, `L`, for 1, 2, 8, 8, 16 byte defaults.
+   - Can be used with `hh`, `h`, `l`, `ll`, `L`, for 1, 2, 8, 8, 16 byte defaults.
  - Print binary specifier `%b` prints raw memory starting at given address
    - Prints a bitstring, alternate form `#` places `.` between every 4 bits.
    - Precision specifies number of bytes; same options as `%m`
