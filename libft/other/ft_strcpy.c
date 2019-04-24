@@ -1,27 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sbprintf.c                                      :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfielder <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/02 19:42:52 by gfielder          #+#    #+#             */
-/*   Updated: 2019/03/18 21:00:21 by gfielder         ###   ########.fr       */
+/*   Created: 2018/09/24 11:40:55 by gfielder          #+#    #+#             */
+/*   Updated: 2019/03/21 19:19:48 by gfielder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include "libft.h"
-#include "ftpf_backend.h"
-#include "libftprintf.h"
+#include <stddef.h>
 
-int		ft_sbprintf(t_stringbuilder *sb, const char *fmt, ...)
+char	*ft_strcpy(char *dst, const char *src)
 {
-	va_list		args;
-	int			ret;
+	int	i;
 
-	va_start(args, fmt);
-	ret = ft_vsbprintf(sb, fmt, args);
-	va_end(args);
-	return (ret);
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}
+
+char	*ft_strncpy(char *dst, const char *src, size_t n)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (i < n)
+	{
+		if (i == j && src[i] != '\0')
+		{
+			dst[i] = src[i];
+			j++;
+		}
+		else
+			dst[i] = '\0';
+		i++;
+	}
+	return (dst);
 }

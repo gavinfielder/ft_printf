@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_asprintf.c                                      :+:      :+:    :+:   */
+/*   ft_vsnprintf.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfielder <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/02 19:54:18 by gfielder          #+#    #+#             */
-/*   Updated: 2019/03/18 20:59:47 by gfielder         ###   ########.fr       */
+/*   Created: 2019/03/08 14:48:45 by gfielder          #+#    #+#             */
+/*   Updated: 2019/03/08 14:49:53 by gfielder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "libft.h"
-#include "libftprintf.h"
 #include "ftpf_backend.h"
 
-int		ft_asprintf(char **ret, const char *fmt, ...)
+int		ft_vsnprintf(char *str, size_t size, const char *fmt, va_list args)
 {
-	va_list			args;
-	t_stringbuilder	*sb;
+	t_multistringer	*ms;
 	int				ret_val;
 
-	if (ret == NULL)
-		return (-1);
-	sb = ft_sbnew();
-	if (sb == NULL)
-		return (-1);
-	va_start(args, fmt);
-	ret_val = ft_vsbprintf(sb, fmt, args);
-	*ret = ft_sbtostr(sb);
-	if (*ret == NULL)
-		return (-1);
-	ft_sbdel(&sb);
-	va_end(args);
+	ms = (t_multistringer *)ft_swnew(str, size);
+	if (!ms)
+		return (FTPF_ERROR);
+	ret_val = ftpf_master(ms, fmt, size, args);
+	ft_swdel((t_stringwriter **)(&ms));
 	return (ret_val);
 }

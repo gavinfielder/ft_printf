@@ -1,56 +1,77 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile.new                                       :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: gfielder <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/02/19 14:34:55 by gfielder          #+#    #+#              #
-#    Updated: 2019/03/03 20:35:09 by gfielder         ###   ########.fr        #
+#    Created: 2019/03/21 14:09:16 by gfielder          #+#    #+#              #
+#    Updated: 2019/03/24 16:01:14 by gfielder         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
+#
 NAME=libft.a
 CC=clang
-CFLAGS=-Wall -g -Wextra -Werror -I includes/
+CFLAGS=-Wall -g -Wextra -Werror -I inc/
 
-SRC=ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_itoa_base.c ft_lstadd.c ft_lstcpy_elem.c ft_lstdel.c ft_lstdelone.c ft_lstiter.c ft_lstmap.c ft_lstnew.c ft_lstnew_byref.c ft_memalloc.c ft_memccpy.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memdel.c ft_memmove.c ft_memset.c ft_print_hex.c ft_print_hex_padded.c ft_print_memory.c ft_putchar.c ft_putchar_fd.c ft_putendl.c ft_putendl_fd.c ft_putnbr.c ft_putnbr_fd.c ft_putstr.c ft_putstr_fd.c ft_strcat.c ft_strchr.c ft_strclr.c ft_strcmp.c ft_strcpy.c ft_strdel.c ft_strdup.c ft_strequ.c ft_striter.c ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlen.c ft_strmap.c ft_strmapi.c ft_strncat.c ft_strnew.c ft_strncmp.c ft_strncpy.c ft_strnequ.c ft_strnstr.c ft_strrchr.c ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c ft_toupper.c ft_tolower.c ft_printhexbyte.c ft_putchar_np.c ft_memdelr.c \
-	ft_hatnew.c ft_hatlfnew.c ft_hatinslf.c ft_hat_get_start_index.c ft_hat_get_end_index.c ft_hatset.c ft_hataccess.c ft_hatdellf.c ft_hatdel.c ft_hat_toarr.c ft_hatdeltolf.c ft_hatreindex.c ft_hatprint.c \
-	ft_sbnew.c ft_sbtostr.c ft_sbwrite.c ft_sbwriten.c ft_sbclear.c ft_sbdel.c \
-	ft_swnew.c ft_swdel.c ft_swwrite.c ft_swwriten.c ft_swclear.c \
-	ft_fdwwrite.c ft_fdwwriten.c ft_fdwclear.c ft_fdwdel.c ft_fdwnew.c \
-	ft_msdel.c ft_mswrite.c ft_mswriten.c ft_msclear.c
+SRC=other/ft_get_next_line.c \
+other/ft_putstr.c \
+other/ft_strcmp.c \
+other/ft_mem_1.c \
+other/ft_destroy_nullterm_ptrarray.c \
+other/ft_strsplit.c \
+other/ft_strstr.c \
+other/ft_putnbr.c \
+other/ft_litoa.c \
+other/ft_str_constructors.c \
+other/ft_mem_2.c \
+other/ft_strcpy.c \
+other/ft_putchar.c \
+other/ft_itoa.c \
+other/ft_str_aux.c \
+other/ft_strtrim.c \
+other/ft_strcat.c \
+other/ft_strjoin.c \
+other/ft_atoi.c \
+other/ft_print_hex.c \
+hat/ft_hat_toarr.c \
+hat/ft_hatdellf.c \
+hat/ft_hat_aux.c \
+hat/ft_hatinslf.c \
+hat/ft_hat_backend_1.c \
+hat/ft_hat.c \
+multistringer/ft_multistringer_aux.c \
+multistringer/ft_sbtostr.c \
+multistringer/ft_buffwriter.c \
+multistringer/ft_stringwriter.c \
+multistringer/ft_fildeswriter.c \
+multistringer/ft_multistringer.c \
+multistringer/ft_mswrite_nullterm.c \
+multistringer/ft_stringbuilder.c
 
-OBJ=$(SRC:.c=.o)
+OBJ:=$(shell echo $(SRC) | sed "s/\.c/\.o/g" | sed "s/other\//bin\//g" | sed "s/hat\//bin\//g" | sed "s/multistringer\//bin\//g")
+
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): bin
 	@ar rs $(NAME) $(OBJ) > /dev/null 2>&1
 	@echo "Libft compiled."
 
-%.o: %.c
-	@clang -c $(CFLAGS) $< -o $@
+bin: $(SRC)
+	@mkdir -p bin
+	@clang -c $(CFLAGS) $(SRC)
+	@mv *.o bin
 
 clean:
-	@rm -f *.o
-	@rm -f test
+	@rm -rf bin
 	@echo "libft: Object files removed."
 
 fclean:
-	@rm -f *.o
-	@rm -f test
+	@rm -rf bin
 	@rm -f libft.a
 	@echo "libft: Object files and library removed."
 
 re:
 	@make fclean
 	@make all
-
-test_hat: $(SRC) test_hat.c
-	@clang $(CLAGS) -o test $(SRC) test_hat.c
-	@echo "Hashed Array Table testing executable made. Run with ./test"
-
-test_sb: $(SRC) testing/test_sb.c
-	@clang $(CFLAGS) -o test $(SRC) testing/test_sb.c
-	@echo "Stringbuilder testing executable made. Run with ./test"

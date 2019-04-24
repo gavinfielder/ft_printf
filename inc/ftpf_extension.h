@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sbprintf.c                                      :+:      :+:    :+:   */
+/*   ftpf_extension.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfielder <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/02 19:42:52 by gfielder          #+#    #+#             */
-/*   Updated: 2019/03/18 21:00:21 by gfielder         ###   ########.fr       */
+/*   Created: 2019/03/07 23:03:48 by gfielder          #+#    #+#             */
+/*   Updated: 2019/03/20 22:28:12 by gfielder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include "libft.h"
-#include "ftpf_backend.h"
-#include "libftprintf.h"
+#ifndef FTPF_EXTENSION_H
+# define FTPF_EXTENSION_H
 
-int		ft_sbprintf(t_stringbuilder *sb, const char *fmt, ...)
+typedef struct						s_ftpf_ext_dict_entry
 {
-	va_list		args;
-	int			ret;
+	const char						directive[32];
+	const int						position;
+	const int						code;
+}									t_ftpf_ext_dict_entry;
 
-	va_start(args, fmt);
-	ret = ft_vsbprintf(sb, fmt, args);
-	va_end(args);
-	return (ret);
-}
+extern const t_ftpf_ext_dict_entry	g_ftpf_ext_dict[];
+
+typedef struct						s_ftpf_extension_spec
+{
+	int								codes[3];
+}									t_ftpf_extension_spec;
+
+#endif

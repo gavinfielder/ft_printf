@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sbprintf.c                                      :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfielder <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/02 19:42:52 by gfielder          #+#    #+#             */
-/*   Updated: 2019/03/18 21:00:21 by gfielder         ###   ########.fr       */
+/*   Created: 2018/09/25 23:56:09 by gfielder          #+#    #+#             */
+/*   Updated: 2019/03/21 18:32:30 by gfielder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include "libft.h"
-#include "ftpf_backend.h"
-#include "libftprintf.h"
+#include <unistd.h>
 
-int		ft_sbprintf(t_stringbuilder *sb, const char *fmt, ...)
+void	ft_putchar(char c)
 {
-	va_list		args;
-	int			ret;
+	write(1, &c, 1);
+}
 
-	va_start(args, fmt);
-	ret = ft_vsbprintf(sb, fmt, args);
-	va_end(args);
-	return (ret);
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+
+void	ft_putchar_np(char c, char c_if_nonprintable)
+{
+	if (c >= 32 && c <= 126)
+		write(1, &c, 1);
+	else
+		write(1, &c_if_nonprintable, 1);
 }
