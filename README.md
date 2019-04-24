@@ -6,7 +6,7 @@ This is my 42 ft\_printf, a recode of the libc printf.
 
 ## Mandatory Options Handled
 
- - Format specifiers `d`, `i`, `o`, `u`, `x`, `X`, `p`, `s`, `c`, `f`, `%%`
+ - Format specifiers `%d`, `%i`, `%o`, `%u`, `%x`, `%X`, `%p`, `%s`, `%c`, `%f`, `%%`
  - Format flags `0`, `' '`, `#`, `-`, `+`
  - argument size modifiers `hh`, `h`, `l`, `ll`, `L`
  - field width
