@@ -6,7 +6,7 @@
 /*   By: gfielder <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 12:33:50 by gfielder          #+#    #+#             */
-/*   Updated: 2019/03/27 13:35:51 by gfielder         ###   ########.fr       */
+/*   Updated: 2019/04/24 22:06:55 by gfielder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int								ftpf_check_precision_mod(t_ftpf_expandler *ex)
 	{
 		ex->handled_len++;
 		len = number_len(ex);
-		ex->precision = (unsigned char)ft_atoi(ex->start + ex->handled_len);
+		ex->precision = ft_atoi(ex->start + ex->handled_len);
 		ex->handled_len += len;
 		ex->check_flags &= 0xFFFFF981;
 		return (1);
